@@ -2,8 +2,6 @@ import React, { useRef } from "react";
 import { addDoc, collection, } from "firebase/firestore";
 import firebaseServices from "../firebase/firebaseServices";
 import { MdBackHand } from "react-icons/md";
-import { FcApproval } from "react-icons/fc";
-import { compileFunction } from "vm";
 
 const firestore = firebaseServices.getFirestoreInstance();
 const Contact: React.FC = () => {
