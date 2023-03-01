@@ -8,15 +8,15 @@ const Navbar: React.FC = () => {
   return (
     <nav className="flex mt-8 justify-around text-white items-center " >
       <div className="flex mr-96 gap-4 items-center">
-        <a href="https://www.instagram.com/t.pamilo/" target="blank">
+        <a href="https://www.instagram.com/t.pamilo/" target="_blank">
           <GrInstagram className="hover:text-red-500 text-zinc-200 text-2xl" />
         </a>
 
-        <a href="https://www.linkedin.com/in/tommy-pamilo-303879264/" target="blank">
+        <a href="https://www.linkedin.com/in/tommy-pamilo-303879264/" target="_blank">
           <FiLinkedin className="hover:text-red-500 text-zinc-200 text-2xl" />
         </a>
 
-        <a href="https://github.com/Tommy-Pamilo" target="blank">
+        <a href="https://github.com/Tommy-Pamilo" target="_blank">
           <FaGithub className="hover:text-red-500 text-zinc-200 text-2xl" />
         </a>
 

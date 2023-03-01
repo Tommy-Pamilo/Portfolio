@@ -58,13 +58,8 @@ const Contact: React.FC = () => {
         <input placeholder="Your Email" className={inputStyle + " focus:border-blue-400"} type="text" ref={EmailRef} />
         <input placeholder="Title" className={inputStyle + " col-span-2 focus:border-orange-500"} ref={TitleRef} />
         <textarea placeholder="Text" className=" placeholder:text-black bg-gray-500 w-[27.9rem] h-[18rem] focus:outline-none border focus:border-pink-500 rounded-lg" ref={MessageRef}></textarea>
-        {/* <input placeholder="Message" className={inputStyle + " col-span-2"} type="text" /> */}
-
 
         <button onClick={Submit} className="rounded-lg text-center p-2 bg-blue-300 text-black col-span-2 hover:bg-green-500 hover:shadow-[0_0_20px_2px_#0000FF] ">Send Message</button>
-
-
-
 
       </div>
 
