@@ -1,6 +1,6 @@
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCz13ymIBO0bpdX-QB2uLYjSEocjWxWDeo",
@@ -15,29 +15,28 @@ const firebaseConfig = {
 let FirebaseInstance: FirebaseApp;
 
 const InitializeApp = () => {
-    if (!FirebaseInstance) {
-         FirebaseInstance = initializeApp(firebaseConfig);
-    }
+  if (!FirebaseInstance) {
+    FirebaseInstance = initializeApp(firebaseConfig);
+  }
 
-    return FirebaseInstance;
+  return FirebaseInstance;
 };
 
-// const GetFirebaseInstance = () => {
-//     const firebaseInstance = InitializeApp();
+const GetFirestoreInstance = () => {
+  const firebaseInstance = InitializeApp();
 
-//     return getFirestore(firebaseInstance);
-// };
+  return getFirestore(firebaseInstance);
+};
 
 const GetAnalytics = () => {
-    
-        const firebaseInstance = InitializeApp();
+  const firebaseInstance = InitializeApp();
 
-        return getAnalytics(firebaseInstance);
+  return getAnalytics(firebaseInstance);
 };
 
 const firebaseServices = {
-    // getFirestoreInstance: GetFirestoreInstance,
-    getAnalytics: GetAnalytics
+  getFirestoreInstance: GetFirestoreInstance,
+  getAnalytics: GetAnalytics
 };
 
 export default firebaseServices;
