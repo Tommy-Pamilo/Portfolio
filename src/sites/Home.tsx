@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-
 const Home: React.FC = () => {
   document.title = "Home";
 
@@ -16,10 +15,8 @@ const Home: React.FC = () => {
         <p className="uppercase text-red-600 ">Software</p>
         <p className="uppercase text-black">Developer</p>
       </div>
-
-      <NavLink className="py-2 px-4 rounded-full mt-8 w-48 h-12 hover:bg-black text-black justify-center flex items-center  hover:text-red-600 font-semibold bg-red-700 " to="Contact">Get in Touch</NavLink>
     </div>
-  )
-}
+  );
+};
 
 export default Home;
