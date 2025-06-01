@@ -1,12 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { GrInstagram } from "react-icons/gr";
 import { FiLinkedin } from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="flex mt-8 justify-around text-white items-center ">
+    <nav
+      className="fixed top-0 left-0 w-full h-16 text-white flex items-center justify-around px-8 shadow-md z-50"
+      style={{
+        backgroundImage: "radial-gradient(circle, #222 1px, transparent 1px)",
+        backgroundSize: "40px 40px",
+        backgroundColor: "#111",
+      }}
+    >
       <div className="flex mr-96 gap-4 items-center">
         <a
           href="https://www.linkedin.com/in/tommy-pamilo-303879264/"
@@ -25,7 +31,7 @@ const Navbar: React.FC = () => {
         </a>
       </div>
 
-      <div className="gap-2 items-center uppercase">
+      <div className="flex gap-2 items-center uppercase">
         <NavLink
           className="rounded-md hover:text-white hover:bg-black hover:shadow-[0_0_20px_2px_#dc2626] py-3 px-4"
           to="/"
@@ -33,14 +39,14 @@ const Navbar: React.FC = () => {
           Home
         </NavLink>
         <NavLink
-          className="rounded-md hover:text-white hover:bg-black hover:shadow-[0_0_20px_2px_#dc2626] py-3 px-4"
+          className="rounded-md hover:text-white hover:shadow-[0_0_20px_2px_#dc2626] py-3 px-4"
           to="/about"
         >
           About
         </NavLink>
         <NavLink
           className="rounded-md hover:text-white hover:bg-black hover:shadow-[0_0_20px_2px_#dc2626] py-3 px-4"
-          to="Contact"
+          to="/contact"
         >
           Contact
         </NavLink>
