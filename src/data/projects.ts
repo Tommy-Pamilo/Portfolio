@@ -12,7 +12,7 @@ const projects: Project[] = [
     description: "React + Tailwind",
     x: 200,
     y: 150,
-    imageUrl: "/images/hamsteri.jpg",
+    imageUrl: "",
   },
   {
     title: "Todo App",
