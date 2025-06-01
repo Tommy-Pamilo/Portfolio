@@ -8,8 +8,8 @@ export type Project = {
 
 const projects: Project[] = [
   {
-    title: "Portfolio Website",
-    description: "React + Tailwind + Framer Motion",
+    title: "Portfolio",
+    description: "React + Tailwind",
     x: 200,
     y: 150,
     imageUrl: "/images/hamsteri.jpg",
@@ -22,7 +22,7 @@ const projects: Project[] = [
   },
   {
     title: "Game Demo",
-    description: "WebGL/Three.js experiment",
+    description: "unity Game",
     x: 300,
     y: 400,
   },
