@@ -131,11 +131,7 @@ const Contact: React.FC = () => {
       </div>
 
       <div>
-        <a
-          href="http://localhost:3000/"
-          rel="noopener noreferrer"
-          aria-label="Go back"
-        >
+        <a href="/" rel="noopener noreferrer" aria-label="Go back">
           <MdBackHand className="mt-10 text-gray-300 hover:text-red-500 transition-colors duration-300 text-3xl cursor-pointer" />
         </a>
       </div>
