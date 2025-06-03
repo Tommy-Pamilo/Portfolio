@@ -194,13 +194,13 @@ export default function ProjectMap() {
               onClick={() => setZoomedProjectIndex(null)}
             >
               <div
-                className="bg-white p-2 rounded-lg shadow-xl max-w-[95vw] max-h-[80vh] border-4 border-gray-300"
+                className="p-2 rounded-lg shadow-xl max-w-[95vw] max-h-[90vh] border-4 border-gray-300 bg-white"
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
                   src={projects[zoomedProjectIndex].imageUrl}
                   alt={projects[zoomedProjectIndex].title}
-                  className="object-contain max-w-[90vw] max-h-[90vh] rounded"
+                  className="object-contain max-w-[85vw] max-h-[85vh] rounded"
                 />
               </div>
             </div>
