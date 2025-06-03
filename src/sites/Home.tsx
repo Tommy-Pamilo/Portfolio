@@ -171,7 +171,6 @@ export default function ProjectMap() {
               className="w-4 h-4 rounded-full bg-red-600 border-2 border-white shadow-md absolute -top-2 -left-2"
               title={p.title}
             ></div>
-
             <div className="mt-6 ml-6">
               <ProjectCard
                 title={p.title}
