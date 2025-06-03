@@ -8,8 +8,8 @@ type Props = {
 
 export default function ProjectListMobile({ projects }: Props) {
   return (
-    <div className="min-h-screen bg-black p-6 text-white overflow-auto">
-      <header className="text-center mb-8 sticky top-7  bg-black z-20 py-4 px-4">
+    <div className="min-h-screen bg-black p-4 text-white overflow-auto">
+      <header className="text-center mb-8 sticky top-7  bg-black z-10 py-4 px-4">
         <h1 className="text-3xl font-bold mb-2 break-words leading-tight">
           Tommy Pamilo
         </h1>

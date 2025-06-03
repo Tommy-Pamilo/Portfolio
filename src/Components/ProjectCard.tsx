@@ -36,7 +36,7 @@ export default function ProjectCard({
         />
       ) : (
         <div className="bg-gray-300 w-full h-48 rounded-md flex items-center justify-center text-gray-500 mb-4">
-          Kuvalle paikka
+          picture coming soon
         </div>
       )}
 
