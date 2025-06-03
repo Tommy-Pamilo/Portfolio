@@ -3,6 +3,7 @@ type ProjectCardProps = {
   description: string;
   isSelected?: boolean;
   imageUrl?: string;
+  onZoom?: () => void; // lisätty callback
 };
 
 export default function ProjectCard({
@@ -10,6 +11,7 @@ export default function ProjectCard({
   description,
   isSelected = false,
   imageUrl,
+  onZoom,
 }: ProjectCardProps) {
   if (!isSelected) {
     return (
@@ -26,7 +28,11 @@ export default function ProjectCard({
         <img
           src={imageUrl}
           alt={title}
-          className="w-full h-48 object-cover rounded-md mb-4"
+          className="w-full h-48 object-cover rounded-md mb-4 cursor-zoom-in"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (onZoom) onZoom();
+          }}
         />
       ) : (
         <div className="bg-gray-300 w-full h-48 rounded-md flex items-center justify-center text-gray-500 mb-4">

@@ -31,6 +31,9 @@ export default function ProjectMap() {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<
     number | null
   >(null);
+  const [zoomedProjectIndex, setZoomedProjectIndex] = useState<number | null>(
+    null
+  );
 
   const draggingIndex = useRef<number | null>(null);
   const dragStartPos = useRef<{ x: number; y: number } | null>(null);
@@ -83,7 +86,9 @@ export default function ProjectMap() {
 
   const handleProjectClick = (index: number) => {
     if (!isDragging.current) {
+      // Vaihdetaan valinta tai poistetaan se
       setSelectedProjectIndex(index === selectedProjectIndex ? null : index);
+      setZoomedProjectIndex(null); // Sulje zoom jos valinta vaihtuu
     }
   };
 
@@ -175,10 +180,31 @@ export default function ProjectMap() {
                 description={p.description}
                 isSelected={selectedProjectIndex === i}
                 imageUrl={p.imageUrl}
+                onZoom={() => setZoomedProjectIndex(i)} // zoom yhdellä klikkauksella
               />
             </div>
           </div>
         ))}
+
+        {/* Zoom-modali */}
+        {zoomedProjectIndex !== null &&
+          projects[zoomedProjectIndex]?.imageUrl && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+              onClick={() => setZoomedProjectIndex(null)}
+            >
+              <div
+                className="bg-white p-2 rounded-lg shadow-xl max-w-[95vw] max-h-[80vh] border-4 border-gray-300"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={projects[zoomedProjectIndex].imageUrl}
+                  alt={projects[zoomedProjectIndex].title}
+                  className="object-contain max-w-[90vw] max-h-[90vh] rounded"
+                />
+              </div>
+            </div>
+          )}
       </div>
     </div>
   );
