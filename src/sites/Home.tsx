@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import projectsData from "../data/projects";
 import ProjectCard from "../Components/ProjectCard";
+import ProjectListMobile from "../Components/mobile";
 
 type Project = (typeof projectsData)[0];
-
-const LOCAL_STORAGE_KEY = "myPortfolioProjectsPositions";
 
 const connections: [number, number][] = [
   [0, 1],
@@ -12,20 +11,23 @@ const connections: [number, number][] = [
   [2, 3],
 ];
 
-export default function ProjectMap() {
-  const getStoredProjects = (): Project[] => {
-    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (stored) {
-      try {
-        return JSON.parse(stored);
-      } catch {
-        return projectsData;
-      }
-    }
-    return projectsData;
-  };
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
 
-  const [projects, setProjects] = useState<Project[]>(getStoredProjects);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  return isMobile;
+}
+
+export default function ProjectMap() {
+  const isMobile = useIsMobile();
+
+  const [projects, setProjects] = useState<Project[]>(projectsData);
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<
     number | null
   >(null);
@@ -41,10 +43,6 @@ export default function ProjectMap() {
     x: window.innerWidth / 2,
     y: window.innerHeight / 2,
   };
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(projects));
-  }, [projects]);
 
   const handleMouseDown = (e: React.MouseEvent, index: number) => {
     e.stopPropagation();
@@ -89,6 +87,10 @@ export default function ProjectMap() {
     }
   };
 
+  if (isMobile) {
+    return <ProjectListMobile projects={projects} />;
+  }
+
   return (
     <div
       className="fixed inset-0 bg-black overflow-hidden"
@@ -129,18 +131,13 @@ export default function ProjectMap() {
             const to = projects[toIndex];
             if (!from || !to) return null;
 
-            const fromX = from.x;
-            const fromY = from.y;
-            const toX = to.x;
-            const toY = to.y;
-
             return (
               <line
                 key={idx}
-                x1={fromX}
-                y1={fromY}
-                x2={toX}
-                y2={toY}
+                x1={from.x}
+                y1={from.y}
+                x2={to.x}
+                y2={to.y}
                 stroke="#f87171"
                 strokeWidth={2}
                 strokeLinecap="round"
@@ -171,6 +168,7 @@ export default function ProjectMap() {
               className="w-4 h-4 rounded-full bg-red-600 border-2 border-white shadow-md absolute -top-2 -left-2"
               title={p.title}
             ></div>
+
             <div className="mt-6 ml-6">
               <ProjectCard
                 title={p.title}

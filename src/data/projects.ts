@@ -9,10 +9,11 @@ export type Project = {
 const projects: Project[] = [
   {
     title: "Portfolio",
-    description: "React + Tailwind",
+    description:
+      "Personal portfolio page with project and skill management. Created with react and Tailwind",
     x: 789,
     y: 614,
-    imageUrl: "",
+    imageUrl: "/images/portti.jpg",
   },
   {
     title: "Todo App",
