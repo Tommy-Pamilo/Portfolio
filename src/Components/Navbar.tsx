@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
         </NavLink>
 
         <NavLink
-          to="/about"
+          to="/skills"
           className={({ isActive }) =>
             `text-zinc-200 hover:text-red-500 uppercase font-semibold ${
               isActive ? "text-red-500" : ""
