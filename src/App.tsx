@@ -4,7 +4,7 @@ import Home from "./sites/Home";
 import Navbar from "./Components/Navbar";
 import Contact from "./sites/Contact";
 
-import SkillBox from "./sites/About";
+import Skills from "./sites/Skills";
 
 const App: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/About" element={<SkillBox />} />
+        <Route path="/Skills" element={<Skills />} />
         <Route path="/Contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>

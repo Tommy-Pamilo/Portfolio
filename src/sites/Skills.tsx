@@ -1,6 +1,6 @@
 import React from "react";
 import { FaReact, FaUnity, FaCss3Alt, FaDatabase } from "react-icons/fa";
-import { SiTypescript, SiCsharp, SiDotnet, SiGithub } from "react-icons/si";
+import { SiTypescript, SiCsharp, SiGithub } from "react-icons/si";
 
 type SkillBoxProps = {
   icon: JSX.Element;
@@ -20,7 +20,7 @@ function SkillBox({ icon, title, description }: SkillBoxProps) {
   );
 }
 
-export default function About() {
+export default function Skills() {
   return (
     <div className="p-4 max-w-6xl mx-auto mt-20 mb-20 text-white">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">

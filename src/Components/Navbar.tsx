@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
           </NavLink>
           <NavLink
             className="rounded-md hover:text-white hover:shadow-[0_0_20px_2px_#dc2626] py-3 px-4"
-            to="/about"
+            to="/Skills"
           >
             Skills
           </NavLink>
