@@ -1,4 +1,3 @@
-import porttiImg from "../public/images/portti.jpg";
 export type Project = {
   title: string;
   description: string;
@@ -14,7 +13,7 @@ const projects: Project[] = [
       "Personal portfolio page with project and skill management. Created with react and Tailwind",
     x: 789,
     y: 614,
-    imageUrl: porttiImg,
+    imageUrl: "/images/portfolio.JPG",
   },
   {
     title: "Todo App",
