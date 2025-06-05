@@ -20,7 +20,7 @@ export default function ProjectListMobile({ projects }: Props) {
         <p className="text-lg">Software Developer</p>
       </header>
 
-      <main className="flex flex-col gap-6 max-w-lg mx-auto">
+      <main className="flex flex-col gap-5 max-w-lg mx-auto pb-32">
         {projects.map((project, index) => (
           <div key={project.title}>
             <ProjectCard
@@ -34,7 +34,6 @@ export default function ProjectListMobile({ projects }: Props) {
         ))}
       </main>
 
-      {/* Zoom-modali mobiilille */}
       {zoomedProjectIndex !== null &&
         projects[zoomedProjectIndex]?.imageUrl && (
           <div
