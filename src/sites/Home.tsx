@@ -27,6 +27,9 @@ function useIsMobile() {
 export default function ProjectMap() {
   const isMobile = useIsMobile();
 
+  const [originalPositions, setOriginalPositions] = useState<
+    Record<number, { x: number; y: number }>
+  >({});
   const [projects, setProjects] = useState<Project[]>(projectsData);
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<
     number | null
@@ -34,6 +37,7 @@ export default function ProjectMap() {
   const [zoomedProjectIndex, setZoomedProjectIndex] = useState<number | null>(
     null
   );
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const draggingIndex = useRef<number | null>(null);
   const dragStartPos = useRef<{ x: number; y: number } | null>(null);
@@ -85,16 +89,70 @@ export default function ProjectMap() {
   };
 
   const handleProjectClick = (index: number) => {
-    if (!isDragging.current) {
-      // Vaihdetaan valinta tai poistetaan se
-      setSelectedProjectIndex(index === selectedProjectIndex ? null : index);
-      setZoomedProjectIndex(null); // Sulje zoom jos valinta vaihtuu
-    }
-  };
+    if (isDragging.current) return;
 
-  if (isMobile) {
-    return <ProjectListMobile projects={projects} />;
-  }
+    const margin = 40;
+    const cardWidth = 400;
+    const cardHeight = 400;
+
+    const currentX = projects[index].x;
+    const currentY = projects[index].y;
+
+    if (selectedProjectIndex === index) {
+      if (originalPositions[index]) {
+        setProjects((prev) => {
+          const newProjects = [...prev];
+          newProjects[index] = {
+            ...newProjects[index],
+            x: originalPositions[index].x,
+            y: originalPositions[index].y,
+          };
+          return newProjects;
+        });
+      }
+
+      setSelectedProjectIndex(null);
+      setZoomedProjectIndex(null);
+      return;
+    }
+
+    setOriginalPositions((prev) => ({
+      ...prev,
+      [index]: prev[index] || { x: currentX, y: currentY },
+    }));
+
+    let newX = currentX;
+    let newY = currentY;
+
+    const bottomY = currentY + cardHeight + margin;
+    if (bottomY > window.innerHeight) {
+      const offset = bottomY - window.innerHeight;
+      newY = Math.max(currentY - offset, margin);
+    }
+
+    if (currentX < margin) {
+      newX = margin;
+    }
+
+    const rightX = currentX + cardWidth;
+    if (rightX > window.innerWidth - margin) {
+      const offset = rightX - (window.innerWidth - margin);
+      newX = currentX - offset;
+    }
+
+    setProjects((prev) => {
+      const newProjects = [...prev];
+      newProjects[index] = {
+        ...newProjects[index],
+        x: newX,
+        y: newY,
+      };
+      return newProjects;
+    });
+
+    setSelectedProjectIndex(index);
+    setZoomedProjectIndex(null);
+  };
 
   return (
     <div
@@ -154,6 +212,7 @@ export default function ProjectMap() {
         {projects.map((p, i) => (
           <div
             key={i}
+            ref={(el) => (cardRefs.current[i] = el)}
             className={`absolute select-none ${
               draggingIndex.current === i && isDragging.current
                 ? "cursor-grabbing"
@@ -169,10 +228,7 @@ export default function ProjectMap() {
             onMouseDown={(e) => handleMouseDown(e, i)}
             onClick={() => handleProjectClick(i)}
           >
-            <div
-              className="w-4 h-4 rounded-full bg-red-600 border-2 border-white shadow-md absolute -top-2 -left-2"
-              title={p.title}
-            ></div>
+            <div className="w-4 h-4 rounded-full bg-red-600 border-2 border-white shadow-md absolute -top-2 -left-2"></div>
 
             <div className="mt-6 ml-6">
               <ProjectCard
@@ -180,13 +236,12 @@ export default function ProjectMap() {
                 description={p.description}
                 isSelected={selectedProjectIndex === i}
                 imageUrl={p.imageUrl}
-                onZoom={() => setZoomedProjectIndex(i)} // zoom yhdellä klikkauksella
+                onZoom={() => setZoomedProjectIndex(i)}
               />
             </div>
           </div>
         ))}
 
-        {/* Zoom-modali */}
         {zoomedProjectIndex !== null &&
           projects[zoomedProjectIndex]?.imageUrl && (
             <div

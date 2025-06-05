@@ -13,7 +13,6 @@ const Navbar: React.FC = () => {
           backgroundSize: "40px 40px",
         }}
       >
-        {/* Vasemmalla someikonit */}
         <div className="flex gap-4 items-center">
           <a
             href="https://www.linkedin.com/in/tommy-pamilo-303879264/"
@@ -32,7 +31,6 @@ const Navbar: React.FC = () => {
           </a>
         </div>
 
-        {/* Oikealla navigointilinkit, mutta eivät ihan reunassa */}
         <div
           className="hidden md:flex gap-6 items-center uppercase"
           style={{ marginRight: "2rem" }}
@@ -58,7 +56,6 @@ const Navbar: React.FC = () => {
         </div>
       </nav>
 
-      {/* Mobiilin alapalkki navigointilinkkejä varten */}
       <nav
         className="fixed bottom-0 left-0 w-full h-16 bg-[#111] flex justify-around items-center shadow-md z-50 md:hidden"
         style={{
