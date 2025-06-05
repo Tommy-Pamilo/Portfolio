@@ -154,6 +154,10 @@ export default function ProjectMap() {
     setZoomedProjectIndex(null);
   };
 
+  if (isMobile) {
+    return <ProjectListMobile projects={projects} />;
+  }
+
   return (
     <div
       className="fixed inset-0 bg-black overflow-hidden"
