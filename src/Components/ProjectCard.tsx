@@ -15,7 +15,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   if (!isSelected) {
     return (
-      <div className="bg-white shadow-lg rounded-lg p-4 w-64 cursor-pointer">
+      <div className="bg-white shadow-lg rounded-lg p-4 w-full cursor-pointer">
         <h2 className="text-lg font-bold">{title}</h2>
         <p className="text-sm text-gray-700">{description}</p>
       </div>
@@ -23,12 +23,12 @@ export default function ProjectCard({
   }
 
   return (
-    <div className="bg-white shadow-2xl rounded-lg p-6 w-96 cursor-pointer select-none">
+    <div className="bg-white shadow-2xl rounded-lg p-6 w-full cursor-pointer select-none">
       {imageUrl ? (
         <img
           src={imageUrl}
           alt={title}
-          className="w-full h-48 object-cover rounded-md mb-4 cursor-zoom-in"
+          className="w-full h-full object-cover rounded-md mb-4 cursor-zoom-in"
           onClick={(e) => {
             e.stopPropagation();
             if (onZoom) onZoom();

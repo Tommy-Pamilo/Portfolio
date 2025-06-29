@@ -13,14 +13,14 @@ export default function ProjectListMobile({ projects }: Props) {
 
   return (
     <div className="min-h-screen bg-black p-4 text-white overflow-auto">
-      <header className="text-center mb-8 sticky top-7 bg-black z-10 py-4 px-4">
+      <header className="text-center mb-8 sticky top-7 bg-black z-full py-4 px-4">
         <h1 className="text-3xl font-bold mb-2 break-words leading-tight">
           Tommy Pamilo
         </h1>
         <p className="text-lg">Software Developer</p>
       </header>
 
-      <main className="flex flex-col gap-5 max-w-lg mx-auto pb-32">
+      <main className="flex flex-col gap-5 w-full mx-auto pb-32">
         {projects.map((project, index) => (
           <div key={project.title}>
             <ProjectCard
@@ -37,7 +37,7 @@ export default function ProjectListMobile({ projects }: Props) {
       {zoomedProjectIndex !== null &&
         projects[zoomedProjectIndex]?.imageUrl && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-full"
             onClick={() => setZoomedProjectIndex(null)}
           >
             <div
