@@ -249,17 +249,17 @@ export default function ProjectMap() {
         {zoomedProjectIndex !== null &&
           projects[zoomedProjectIndex]?.imageUrl && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-full"
+              className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
               onClick={() => setZoomedProjectIndex(null)}
             >
               <div
-                className="p-2 rounded-lg shadow-xl w-full h-full border-4 border-gray-300 bg-white"
+                className="p-2 rounded-lg shadow-xl max-w-[95vw] max-h-[90vh] border-4 border-gray-300 bg-white"
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
                   src={projects[zoomedProjectIndex].imageUrl}
                   alt={projects[zoomedProjectIndex].title}
-                  className="object-contain w-full h-full rounded"
+                  className="object-contain max-w-[85vw] max-h-[85vh] rounded"
                 />
               </div>
             </div>

@@ -11,7 +11,7 @@ type SkillBoxProps = {
 
 function SkillBox({ icon, title, description }: SkillBoxProps) {
   return (
-    <div className="border rounded-lg p-4 shadow-md w-full h-48 flex flex-col">
+    <div className="border rounded-lg p-4 shadow-md w-full h-full flex flex-col">
       <div className="flex items-center gap-4 mb-3">
         <div>{icon}</div>
         <h2 className="text-xl font-bold">{title}</h2>

@@ -23,7 +23,7 @@ export default function ProjectCard({
   }
 
   return (
-    <div className="bg-white shadow-2xl rounded-lg p-6 w-full cursor-pointer select-none">
+    <div className="bg-white shadow-2xl rounded-lg p-6 w-full sm:w-96 cursor-pointer select-none">
       {imageUrl ? (
         <img
           src={imageUrl}
