@@ -35,12 +35,7 @@ const Navbar: React.FC = () => {
           className="hidden md:flex gap-6 items-center uppercase"
           style={{ marginRight: "2rem" }}
         >
-          <NavLink
-            className="rounded-md hover:text-white hover:bg-black hover:shadow-[0_0_20px_2px_#dc2626] py-3 px-4"
-            to="/"
-          >
-            Home
-          </NavLink>
+          
          
           
         </div>
@@ -53,16 +48,7 @@ const Navbar: React.FC = () => {
           backgroundSize: "40px 40px",
         }}
       >
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `text-zinc-200 hover:text-red-500 uppercase font-semibold ${
-              isActive ? "text-red-500" : ""
-            }`
-          }
-        >
-          Home
-        </NavLink>
+       
 
         
       </nav>
