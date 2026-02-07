@@ -2,20 +2,22 @@ import React, { useState } from "react";
 import ProjectCard from "../Components/ProjectCard";
 import projectsData from "../data/projects";
 import skillData from "../data/skills"; 
-import Contact from "./Contact"; 
 import { MdEmail } from "react-icons/md"; 
 
-export default function Home() {
+
+interface HomeProps {
+  onContactClick: () => void;
+}
+
+export default function Home({ onContactClick }: HomeProps) {
   const [galleryImages, setGalleryImages] = useState<string[] | null>(null);
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [isContactOpen, setIsContactOpen] = useState(false); 
 
   const openGallery = (images: string[], index: number) => {
     setGalleryImages(images);
     setCurrentIdx(index);
   };
 
-  
   const nextImg = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (galleryImages) {
@@ -45,10 +47,9 @@ export default function Home() {
             Tommy Pamilo
           </h1>
           <p className="text-zinc-400 leading-relaxed text-[15px]">
-         <span className="text-white font-medium">Junior 3D Modeler</span> focused on game assets and diverse creative projects. 
-           Based in Finland, I also <span className="text-white font-medium">occasionally engage in web development</span>, building clean and modern websites.
+            <span className="text-white font-medium">Junior 3D Modeler</span> focused on game assets and diverse creative projects. 
+            Based in Finland, I also <span className="text-white font-medium">occasionally engage in web development</span>, building clean and modern websites.
           </p>
-          
         </header>
 
         {/* projects */}
@@ -95,62 +96,31 @@ export default function Home() {
           </div>
         </section>
 
-        {/* navigation arrows*/}
+        {/* gallery arrows */}
         {galleryImages && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4" onClick={() => setGalleryImages(null)}>
-            
-            {/*navigation*/}
             {galleryImages.length > 1 && (
               <>
-                <button 
-                  onClick={prevImg}
-                  className="absolute left-4 md:left-10 text-white/50 hover:text-white transition-colors text-4xl p-4 z-[110]"
-                >
-                  {"<"}
-                </button>
-                <button 
-                  onClick={nextImg}
-                  className="absolute right-4 md:right-10 text-white/50 hover:text-white transition-colors text-4xl p-4 z-[110]"
-                >
-                  {">"}
-                </button>
+                <button onClick={prevImg} className="absolute left-4 md:left-10 text-white/50 hover:text-white transition-colors text-4xl p-4 z-[110]">{"<"}</button>
+                <button onClick={nextImg} className="absolute right-4 md:right-10 text-white/50 hover:text-white transition-colors text-4xl p-4 z-[110]">{">"}</button>
               </>
             )}
-
             <div className="relative max-w-5xl flex flex-col items-center">
-                <img 
-                  src={galleryImages[currentIdx]} 
-                  className="max-w-full max-h-[80vh] object-contain rounded shadow-2xl shadow-red-500/10" 
-                  onClick={(e) => e.stopPropagation()}
-                />
-                <div className="mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
-                  {currentIdx + 1} / {galleryImages.length}
-                </div>
+                <img src={galleryImages[currentIdx]} className="max-w-full max-h-[80vh] object-contain rounded shadow-2xl shadow-red-500/10" onClick={(e) => e.stopPropagation()}/>
+                <div className="mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">{currentIdx + 1} / {galleryImages.length}</div>
             </div>
           </div>
         )}
 
-        {/* button for contact  */}
-        <button 
-          onClick={() => setIsContactOpen(true)}
-          className="fixed bottom-8 right-8 z-[140] bg-white hover:bg-red-600 text-black hover:text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 group"
-        >
-          <MdEmail size={24} className="group-hover:rotate-12 transition-transform" />
-        </button>
+    
+        
+<button 
+  onClick={onContactClick}
+  className="hidden md:block fixed bottom-8 right-8 z-[140] bg-white hover:bg-red-600 text-black hover:text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 group"
+>
+  <MdEmail size={24} className="group-hover:rotate-12 transition-transform" />
+</button>
 
-        {/* contact opener */}
-        {isContactOpen && (
-          <div 
-            className="fixed inset-0 z-[150] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-            onClick={() => setIsContactOpen(false)}
-          >
-            <div onClick={(e) => e.stopPropagation()}>
-              <Contact onClose={() => setIsContactOpen(false)} />
-            </div>
-          </div>
-        )}
-
-        {/* FOOTER */}
         <footer className="mt-20 pt-8 border-t border-zinc-900 text-[10px] tracking-widest text-zinc-600 uppercase">
           © {new Date().getFullYear()} Tommy Pamilo • Portfolio
         </footer>
