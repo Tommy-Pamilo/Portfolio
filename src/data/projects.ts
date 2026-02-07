@@ -1,38 +1,31 @@
-export type Project = {
+export interface Project {
   title: string;
   description: string;
-  x: number;
-  y: number;
-  imageUrl?: string;
-};
+  images: string[]; 
+  tags: string[];   
+  x?: number;       
+  y?: number;      
+}
 
-const projects: Project[] = [
+
+const projectsData: Project[] = [
+ 
+ {
+  title: "Stylized Low-Poly Marketplace",
+  description: "A game-ready interior environment featuring a variety of modular props. Optimized for real-time performance and stylized game projects.",
+  images: [
+    "/marketblender.png", 
+    "/ylapuolikauppa.png", 
+    "/sivustakauppa.png"
+  ], 
+  tags: ["Blender", "Low-Poly", "Game-Ready", "Stylized"],
+},
   {
-    title: "Portfolio",
-    description:
-      "Personal portfolio page with project and skill management. Created with react and Tailwind",
-    x: 789,
-    y: 614,
-    imageUrl: "/images/portfolio.JPG",
-  },
-  {
-    title: "Todo App",
-    description: "Full-stack project with Node.js backend",
-    x: 1462,
-    y: 300,
-  },
-  {
-    title: "Game Demo",
-    description: "unity Game",
-    x: 93,
-    y: 537,
-  },
-  {
-    title: "Weather App",
-    description: "Real-time weather data from OpenWeatherMap API",
-    x: 1022,
-    y: 121,
-  },
+    title: "Portfolio Website",
+    description: "Porfolio for 3D models and software projects. Built with React, Tailwind CSS, and TypeScript. Features a custom lightbox gallery and responsive design.",
+    images: ["/portfolio.png"],
+    tags: ["React", "TypeScript", "Tailwind CSS"],
+  }
 ];
 
-export default projects;
+export default projectsData;
