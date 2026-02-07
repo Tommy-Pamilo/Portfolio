@@ -1,269 +1,127 @@
-import React, { useState, useEffect, useRef } from "react";
-import projectsData from "../data/projects";
+import React, { useState } from "react";
 import ProjectCard from "../Components/ProjectCard";
-import ProjectListMobile from "../Components/mobile";
+import projectsData from "../data/projects";
+import skillData from "../data/skills"; 
+import Contact from "./Contact"; 
+import { MdEmail } from "react-icons/md"; 
 
-type Project = (typeof projectsData)[0];
+export default function Home() {
+  const [galleryImages, setGalleryImages] = useState<string[] | null>(null);
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [isContactOpen, setIsContactOpen] = useState(false); 
 
-const connections: [number, number][] = [
-  [0, 1],
-  [1, 2],
-  [2, 3],
-];
-
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  return isMobile;
-}
-
-export default function ProjectMap() {
-  const isMobile = useIsMobile();
-
-  const [originalPositions, setOriginalPositions] = useState<
-    Record<number, { x: number; y: number }>
-  >({});
-  const [projects, setProjects] = useState<Project[]>(projectsData);
-  const [selectedProjectIndex, setSelectedProjectIndex] = useState<
-    number | null
-  >(null);
-  const [zoomedProjectIndex, setZoomedProjectIndex] = useState<number | null>(
-    null
-  );
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const draggingIndex = useRef<number | null>(null);
-  const dragStartPos = useRef<{ x: number; y: number } | null>(null);
-  const dragOffset = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const isDragging = useRef(false);
-
-  const centerWidth = 350;
-  const centerHeight = 120;
-  const center = {
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
+  const openGallery = (images: string[], index: number) => {
+    setGalleryImages(images);
+    setCurrentIdx(index);
   };
-
-  const handleMouseDown = (e: React.MouseEvent, index: number) => {
-    e.stopPropagation();
-    draggingIndex.current = index;
-    dragStartPos.current = { x: e.clientX, y: e.clientY };
-    dragOffset.current = { x: projects[index].x, y: projects[index].y };
-    isDragging.current = false;
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (draggingIndex.current === null || !dragStartPos.current) return;
-
-    const dx = e.clientX - dragStartPos.current.x;
-    const dy = e.clientY - dragStartPos.current.y;
-
-    if (!isDragging.current && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
-      isDragging.current = true;
-    }
-
-    if (isDragging.current) {
-      setProjects((prevProjects) => {
-        const newProjects = [...prevProjects];
-        newProjects[draggingIndex.current!] = {
-          ...newProjects[draggingIndex.current!],
-          x: dragOffset.current.x + dx,
-          y: dragOffset.current.y + dy,
-        };
-        return newProjects;
-      });
-    }
-  };
-
-  const handleMouseUp = () => {
-    draggingIndex.current = null;
-    dragStartPos.current = null;
-    isDragging.current = false;
-  };
-
-  const handleProjectClick = (index: number) => {
-    if (isDragging.current) return;
-
-    const margin = 40;
-    const cardWidth = 400;
-    const cardHeight = 400;
-
-    const currentX = projects[index].x;
-    const currentY = projects[index].y;
-
-    if (selectedProjectIndex === index) {
-      if (originalPositions[index]) {
-        setProjects((prev) => {
-          const newProjects = [...prev];
-          newProjects[index] = {
-            ...newProjects[index],
-            x: originalPositions[index].x,
-            y: originalPositions[index].y,
-          };
-          return newProjects;
-        });
-      }
-
-      setSelectedProjectIndex(null);
-      setZoomedProjectIndex(null);
-      return;
-    }
-
-    setOriginalPositions((prev) => ({
-      ...prev,
-      [index]: prev[index] || { x: currentX, y: currentY },
-    }));
-
-    let newX = currentX;
-    let newY = currentY;
-
-    const bottomY = currentY + cardHeight + margin;
-    if (bottomY > window.innerHeight) {
-      const offset = bottomY - window.innerHeight;
-      newY = Math.max(currentY - offset, margin);
-    }
-
-    if (currentX < margin) {
-      newX = margin;
-    }
-
-    const rightX = currentX + cardWidth;
-    if (rightX > window.innerWidth - margin) {
-      const offset = rightX - (window.innerWidth - margin);
-      newX = currentX - offset;
-    }
-
-    setProjects((prev) => {
-      const newProjects = [...prev];
-      newProjects[index] = {
-        ...newProjects[index],
-        x: newX,
-        y: newY,
-      };
-      return newProjects;
-    });
-
-    setSelectedProjectIndex(index);
-    setZoomedProjectIndex(null);
-  };
-
-  if (isMobile) {
-    return <ProjectListMobile projects={projects} />;
-  }
 
   return (
-    <div
-      className="fixed inset-0 bg-black overflow-hidden"
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-    >
-      <div
-        className="relative"
-        style={{
-          width: "100vw",
-          height: "100vh",
-          backgroundImage: "radial-gradient(circle, #222 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      >
-        <div
-          className="absolute text-center text-white select-none"
-          style={{
-            top: center.y - centerHeight / 2,
-            left: center.x - centerWidth / 2,
-            width: centerWidth,
-            height: centerHeight,
-            zIndex: 10,
-            pointerEvents: "none",
-          }}
-        >
-          <h1 className="text-4xl font-bold mb-2">Tommy Pamilo</h1>
-          <p className="text-lg">Software Developer</p>
-        </div>
+    <div className="min-h-screen bg-black text-zinc-300 selection:bg-zinc-700 selection:text-white relative font-sans">
+      
+    
+      <div className="fixed inset-0 pointer-events-none opacity-20" style={{
+        backgroundImage: "radial-gradient(circle, #444 1px, transparent 1px)",
+        backgroundSize: "40px 40px",
+      }} />
 
-        <svg
-          className="absolute top-0 left-0 w-full h-full pointer-events-none"
-          style={{ zIndex: 15 }}
-        >
-          {connections.map(([fromIndex, toIndex], idx) => {
-            const from = projects[fromIndex];
-            const to = projects[toIndex];
-            if (!from || !to) return null;
+      <div className="relative max-w-3xl mx-auto px-6 pt-32 pb-20 z-10">
+        
+       
+        <header className="mb-20">
+          <h1 className="text-white text-4xl font-bold mb-8 tracking-tight italic uppercase">
+            Tommy Pamilo
+          </h1>
+          <p className="text-zinc-400 leading-relaxed text-[15px]">
+            <span className="text-white font-medium">3D Modeler & Software Developer</span> based in Finland. 
+            I currently focus on creating high-quality 3D assets and building scalable web systems.
+          </p>
+        </header>
 
-            return (
-              <line
-                key={idx}
-                x1={from.x}
-                y1={from.y}
-                x2={to.x}
-                y2={to.y}
-                stroke="#f87171"
-                strokeWidth={2}
-                strokeLinecap="round"
-              />
-            );
-          })}
-        </svg>
-
-        {projects.map((p, i) => (
-          <div
-            key={i}
-            ref={(el) => (cardRefs.current[i] = el)}
-            className={`absolute select-none ${
-              draggingIndex.current === i && isDragging.current
-                ? "cursor-grabbing"
-                : "cursor-pointer"
-            }`}
-            style={{
-              top: p.y,
-              left: p.x,
-              zIndex: selectedProjectIndex === i ? 30 : 20,
-              transition: isDragging.current ? "none" : "all 0.3s ease",
-              userSelect: "none",
-            }}
-            onMouseDown={(e) => handleMouseDown(e, i)}
-            onClick={() => handleProjectClick(i)}
-          >
-            <div className="w-4 h-4 rounded-full bg-red-600 border-2 border-white shadow-md absolute -top-2 -left-2"></div>
-
-            <div className="mt-6 ml-6">
-              <ProjectCard
+        {/* projects */}
+        <section className="mb-24">
+          <h2 className="text-[11px] font-bold tracking-[0.2em] text-zinc-500 uppercase mb-8">
+            Featured Projects
+          </h2>
+          <div className="space-y-4">
+            {projectsData.map((p, index) => (
+              <ProjectCard 
+                key={index}
                 title={p.title}
                 description={p.description}
-                isSelected={selectedProjectIndex === i}
-                imageUrl={p.imageUrl}
-                onZoom={() => setZoomedProjectIndex(i)}
+                images={p.images}
+                tags={p.tags}
+                onOpenGallery={openGallery}
               />
+            ))}
+          </div>
+        </section>
+
+        {/* skills */}
+        <section className="mb-20">
+          <h2 className="text-[11px] font-bold tracking-[0.2em] text-zinc-500 uppercase mb-8">
+            Technical Skills
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {skillData.map((skill, index) => (
+              <div 
+                key={index} 
+                className="flex gap-4 p-4 bg-zinc-900/30 border border-zinc-800/50 rounded-xl hover:border-zinc-700 transition-colors group"
+              >
+                <div className="flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0">
+                 
+                  {React.cloneElement(skill.icon as React.ReactElement, { size: 28 })}
+                </div>
+                <div>
+                  <h3 className="text-white text-sm font-semibold mb-1">{skill.title}</h3>
+                  <p className="text-zinc-500 text-xs leading-relaxed">
+                    {skill.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* gallery */}
+        {galleryImages && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4" onClick={() => setGalleryImages(null)}>
+            <div className="relative max-w-5xl flex flex-col items-center">
+                <img 
+                  src={galleryImages[currentIdx]} 
+                  className="max-w-full max-h-[80vh] object-contain rounded shadow-2xl shadow-red-500/10" 
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <div className="mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+                  {currentIdx + 1} / {galleryImages.length}
+                </div>
             </div>
           </div>
-        ))}
+        )}
 
-        {zoomedProjectIndex !== null &&
-          projects[zoomedProjectIndex]?.imageUrl && (
-            <div
-              className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-              onClick={() => setZoomedProjectIndex(null)}
-            >
-              <div
-                className="p-2 rounded-lg shadow-xl max-w-[95vw] max-h-[90vh] border-4 border-gray-300 bg-white"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <img
-                  src={projects[zoomedProjectIndex].imageUrl}
-                  alt={projects[zoomedProjectIndex].title}
-                  className="object-contain max-w-[85vw] max-h-[85vh] rounded"
-                />
-              </div>
+        {/* button for contact  */}
+        <button 
+          onClick={() => setIsContactOpen(true)}
+          className="fixed bottom-8 right-8 z-[140] bg-white hover:bg-red-600 text-black hover:text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 group"
+        >
+          <MdEmail size={24} className="group-hover:rotate-12 transition-transform" />
+        </button>
+
+        {/* contact opener */}
+        {isContactOpen && (
+          <div 
+            className="fixed inset-0 z-[150] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setIsContactOpen(false)}
+          >
+            <div onClick={(e) => e.stopPropagation()}>
+              <Contact onClose={() => setIsContactOpen(false)} />
             </div>
-          )}
+          </div>
+        )}
+
+        {/* FOOTER */}
+        <footer className="mt-20 pt-8 border-t border-zinc-900 text-[10px] tracking-widest text-zinc-600 uppercase">
+          © {new Date().getFullYear()} Tommy Pamilo • Portfolio
+        </footer>
       </div>
     </div>
   );
