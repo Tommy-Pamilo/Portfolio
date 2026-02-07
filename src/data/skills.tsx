@@ -1,6 +1,7 @@
 import React from "react";
 import { FaReact, FaUnity, FaCss3Alt, FaDatabase } from "react-icons/fa";
-import { SiTypescript, SiCsharp, SiGithub } from "react-icons/si";
+import { SiTypescript, SiCsharp, SiGithub, SiBlender } from "react-icons/si"; 
+
 export type Skill = {
   title: string;
   description: string;
@@ -8,6 +9,12 @@ export type Skill = {
 };
 
 const skillData: Skill[] = [
+  {
+    
+    icon: <SiBlender size={40} color="#F5792A" />, 
+    title: "Blender",
+    description: "I use Blender to create stylized low-poly game assets and 3D environments, focusing on game-ready models.",
+  },
   {
     icon: <FaReact size={40} color="#61DAFB" />,
     title: "React",
@@ -19,7 +26,6 @@ const skillData: Skill[] = [
     title: "C#",
     description: "The most projects were done in this language at school",
   },
-
   {
     icon: <SiTypescript size={40} color="#3178C6" />,
     title: "TypeScript",
@@ -48,4 +54,5 @@ const skillData: Skill[] = [
     description: "I use this database in my projects.",
   },
 ];
+
 export default skillData;
