@@ -2,57 +2,37 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FiLinkedin } from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
-const Navbar: React.FC = () => {
+
+interface NavbarProps {
+  onContactClick: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
   return (
-    <>
-      <nav
-        className="fixed top-0 left-0 w-full h-16 text-white flex items-center justify-between px-8 shadow-md z-50 bg-[#111]"
-        style={{
-         
-          
-        }}
-      >
-        <div className="flex gap-4 items-center">
-          <a
-            href="https://www.linkedin.com/in/tommy-pamilo-303879264/"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <FiLinkedin className="hover:text-red-500 text-zinc-200 text-2xl" />
-          </a>
+    <nav className="fixed top-0 left-0 w-full h-16 text-white flex items-center justify-between px-6 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5 font-sans">
+      
+      <div className="flex gap-5 items-center">
+        <a href="https://www.linkedin.com/in/tommy-pamilo-303879264/" rel="noreferrer" target="_blank" className="transition-transform hover:scale-110">
+          <FiLinkedin className="hover:text-red-500 text-zinc-400 text-xl" />
+        </a>
+        <a href="https://github.com/Tommy-Pamilo" rel="noreferrer" target="_blank" className="transition-transform hover:scale-110">
+          <FaGithub className="hover:text-red-500 text-zinc-400 text-xl" />
+        </a>
 
-          <a
-            href="https://github.com/Tommy-Pamilo"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <FaGithub className="hover:text-red-500 text-zinc-200 text-2xl" />
-          </a>
-        </div>
-
-        <div
-          className="hidden md:flex gap-6 items-center uppercase"
-          style={{ marginRight: "2rem" }}
+     
+        <button 
+          onClick={onContactClick}
+          className="md:hidden transition-transform hover:scale-110 focus:outline-none"
         >
-          
-         
-          
-        </div>
-      </nav>
+          <MdEmail className="hover:text-red-500 text-zinc-400 text-2xl" />
+        </button>
+      </div>
 
-      <nav
-        className="fixed bottom-0 left-0 w-full h-16 bg-[#111] flex justify-around items-center shadow-md z-50 md:hidden"
-        style={{
-          backgroundImage: "radial-gradient(circle, #222 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      >
-       
-
-        
-      </nav>
-    </>
+      <div className="flex gap-8 uppercase tracking-widest text-sm">
+      </div>
+    </nav>
   );
 };
 
