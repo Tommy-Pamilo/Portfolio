@@ -15,10 +15,24 @@ export default function Home() {
     setCurrentIdx(index);
   };
 
+  
+  const nextImg = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (galleryImages) {
+      setCurrentIdx((prev) => (prev + 1) % galleryImages.length);
+    }
+  };
+
+  const prevImg = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (galleryImages) {
+      setCurrentIdx((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-zinc-300 selection:bg-zinc-700 selection:text-white relative font-sans">
       
-    
       <div className="fixed inset-0 pointer-events-none opacity-20" style={{
         backgroundImage: "radial-gradient(circle, #444 1px, transparent 1px)",
         backgroundSize: "40px 40px",
@@ -26,15 +40,15 @@ export default function Home() {
 
       <div className="relative max-w-3xl mx-auto px-6 pt-32 pb-20 z-10">
         
-       
         <header className="mb-20">
           <h1 className="text-white text-4xl font-bold mb-8 tracking-tight italic uppercase">
             Tommy Pamilo
           </h1>
           <p className="text-zinc-400 leading-relaxed text-[15px]">
-            <span className="text-white font-medium">3D Modeler & Software Developer</span> based in Finland. 
-            I currently focus on creating high-quality 3D assets and building scalable web systems.
+         <span className="text-white font-medium">Junior 3D Modeler</span> focused on game assets and diverse creative projects. 
+           Based in Finland, I also <span className="text-white font-medium">occasionally engage in web development</span>, building clean and modern websites.
           </p>
+          
         </header>
 
         {/* projects */}
@@ -68,7 +82,6 @@ export default function Home() {
                 className="flex gap-4 p-4 bg-zinc-900/30 border border-zinc-800/50 rounded-xl hover:border-zinc-700 transition-colors group"
               >
                 <div className="flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0">
-                 
                   {React.cloneElement(skill.icon as React.ReactElement, { size: 28 })}
                 </div>
                 <div>
@@ -82,9 +95,28 @@ export default function Home() {
           </div>
         </section>
 
-        {/* gallery */}
+        {/* navigation arrows*/}
         {galleryImages && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4" onClick={() => setGalleryImages(null)}>
+            
+            {/*navigation*/}
+            {galleryImages.length > 1 && (
+              <>
+                <button 
+                  onClick={prevImg}
+                  className="absolute left-4 md:left-10 text-white/50 hover:text-white transition-colors text-4xl p-4 z-[110]"
+                >
+                  {"<"}
+                </button>
+                <button 
+                  onClick={nextImg}
+                  className="absolute right-4 md:right-10 text-white/50 hover:text-white transition-colors text-4xl p-4 z-[110]"
+                >
+                  {">"}
+                </button>
+              </>
+            )}
+
             <div className="relative max-w-5xl flex flex-col items-center">
                 <img 
                   src={galleryImages[currentIdx]} 
