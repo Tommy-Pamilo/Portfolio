@@ -9,8 +9,8 @@ const Navbar: React.FC = () => {
       <nav
         className="fixed top-0 left-0 w-full h-16 text-white flex items-center justify-between px-8 shadow-md z-50 bg-[#111]"
         style={{
-          backgroundImage: "radial-gradient(circle, #222 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+         
+          
         }}
       >
         <div className="flex gap-4 items-center">
@@ -41,18 +41,8 @@ const Navbar: React.FC = () => {
           >
             Home
           </NavLink>
-          <NavLink
-            className="rounded-md hover:text-white hover:shadow-[0_0_20px_2px_#dc2626] py-3 px-4"
-            to="/Skills"
-          >
-            Skills
-          </NavLink>
-          <NavLink
-            className="rounded-md hover:text-white hover:bg-black hover:shadow-[0_0_20px_2px_#dc2626] py-3 px-4"
-            to="/contact"
-          >
-            Contact
-          </NavLink>
+         
+          
         </div>
       </nav>
 
@@ -74,27 +64,7 @@ const Navbar: React.FC = () => {
           Home
         </NavLink>
 
-        <NavLink
-          to="/skills"
-          className={({ isActive }) =>
-            `text-zinc-200 hover:text-red-500 uppercase font-semibold ${
-              isActive ? "text-red-500" : ""
-            }`
-          }
-        >
-          Skills
-        </NavLink>
-
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            `text-zinc-200 hover:text-red-500 uppercase font-semibold ${
-              isActive ? "text-red-500" : ""
-            }`
-          }
-        >
-          Contact
-        </NavLink>
+        
       </nav>
     </>
   );
