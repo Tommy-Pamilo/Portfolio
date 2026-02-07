@@ -110,7 +110,7 @@ const Contact: React.FC<ContactProps> = ({ onClose }) => {
         <button
           onClick={Submit}
           disabled={isSending}
-          className="md:col-span-2 bg-white hover:bg-red-600 hover:text-white transition-all duration-300 rounded-lg text-black font-bold p-3 uppercase tracking-widest disabled:opacity-50"
+          className="md:col-span-2 bg-white hover:bg-green-600 hover:text-white transition-all duration-300 rounded-lg text-black font-bold p-3 uppercase tracking-widest disabled:opacity-50"
         >
           {isSending ? "Sending..." : "Send Message"}
         </button>
