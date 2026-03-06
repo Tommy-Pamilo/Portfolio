@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ProjectCard from "../Components/ProjectCard";
 import projectsData from "../data/projects";
 import skillData from "../data/skills"; 
-import { MdEmail } from "react-icons/md"; 
 
 export default function Home() {
   const [galleryImages, setGalleryImages] = useState<string[] | null>(null);
@@ -101,7 +100,7 @@ export default function Home() {
               </>
             )}
             <div className="relative max-w-5xl flex flex-col items-center">
-                <img src={galleryImages[currentIdx]} className="max-w-full max-h-[80vh] object-contain rounded shadow-2xl shadow-red-500/10" onClick={(e) => e.stopPropagation()}/>
+                <img alt="" src={galleryImages[currentIdx]} className="max-w-full max-h-[80vh] object-contain rounded shadow-2xl shadow-red-500/10" onClick={(e) => e.stopPropagation()}/>
                 <div className="mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">{currentIdx + 1} / {galleryImages.length}</div>
             </div>
           </div>

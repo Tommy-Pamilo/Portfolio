@@ -1,10 +1,6 @@
-// Korvaa src/Components/Navbar.tsx tällä:
-
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { FiLinkedin } from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
 
 const Navbar: React.FC = () => {
   return (
