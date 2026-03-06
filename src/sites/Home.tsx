@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ProjectCard from "../Components/ProjectCard";
+import Navbar from "../Components/Navbar";
 import projectsData from "../data/projects";
 import skillData from "../data/skills"; 
 
@@ -42,6 +43,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-zinc-300 selection:bg-zinc-700 selection:text-white relative font-sans">
+      <Navbar />
       
       <div className="fixed inset-0 pointer-events-none opacity-20" style={{
         backgroundImage: "radial-gradient(circle, #444 1px, transparent 1px)",

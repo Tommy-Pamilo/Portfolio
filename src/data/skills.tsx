@@ -1,37 +1,54 @@
 import React from "react";
-import skillData from "../data/skills"; 
+import { FaBlender, FaReact, FaNodeJs, FaPython, FaUnity } from "react-icons/fa";
+import { SiTypescript, SiTailwindcss, SiThreedotjs } from "react-icons/si";
 
 export type Skill = {
-  icon: JSX.Element;
+  icon: React.ReactNode;
   title: string;
   description: string;
 };
 
-function SkillBox({ icon, title, description }: Skill) {
-  return (
-    <div className="border rounded-lg p-4 shadow-md w-full h-full flex flex-col">
-      <div className="flex items-center gap-4 mb-3">
-        <div>{icon}</div>
-        <h2 className="text-xl font-bold">{title}</h2>
-      </div>
-      <p className="text-white flex-grow overflow-hidden">{description}</p>
-    </div>
-  );
-}
+const skillData: Skill[] = [
+  {
+    icon: <FaBlender size={24} />,
+    title: "Blender",
+    description: "3D modeling, texturing, and animation for games and visualizations"
+  },
+  {
+    icon: <FaReact size={24} />,
+    title: "React",
+    description: "Building interactive user interfaces with modern JavaScript framework"
+  },
+  {
+    icon: <SiTypescript size={24} />,
+    title: "TypeScript",
+    description: "Type-safe JavaScript development for robust web applications"
+  },
+  {
+    icon: <SiTailwindcss size={24} />,
+    title: "Tailwind CSS",
+    description: "Utility-first CSS framework for rapid UI development"
+  },
+  {
+    icon: <FaNodeJs size={24} />,
+    title: "Node.js",
+    description: "Server-side JavaScript runtime for backend development"
+  },
+  {
+    icon: <FaPython size={24} />,
+    title: "Python",
+    description: "General-purpose programming for automation and data processing"
+  },
+  {
+    icon: <FaUnity size={24} />,
+    title: "Unity",
+    description: "Game development engine for creating interactive 3D experiences"
+  },
+  {
+    icon: <SiThreedotjs size={24} />,
+    title: "Three.js",
+    description: "JavaScript 3D library for web-based 3D graphics and animations"
+  }
+];
 
-export default function Skills() {
-  return (
-    <div className="p-4 max-w-6xl mx-auto mt-20 mb-20 text-white">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
-        {Array.isArray(skillData) && skillData.map((skill: Skill, index: number) => (
-          <SkillBox
-            key={index}
-            icon={skill.icon}
-            title={skill.title}
-            description={skill.description}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+export default skillData;
