@@ -3,6 +3,20 @@ import ProjectCard from "../Components/ProjectCard";
 import projectsData from "../data/projects";
 import skillData from "../data/skills"; 
 
+
+type Project = {
+  title: string;
+  description: string;
+  images: string[];
+  tags: string[];
+};
+
+type Skill = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+};
+
 export default function Home() {
   const [galleryImages, setGalleryImages] = useState<string[] | null>(null);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -52,7 +66,8 @@ export default function Home() {
             Featured Projects
           </h2>
           <div className="space-y-4">
-            {projectsData.map((p, index) => (
+        
+            {Array.isArray(projectsData) && projectsData.map((p: Project, index: number) => (
               <ProjectCard 
                 key={index}
                 title={p.title}
@@ -71,13 +86,15 @@ export default function Home() {
             Technical Skills
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {skillData.map((skill, index) => (
+          
+            {Array.isArray(skillData) && skillData.map((skill: Skill, index: number) => (
               <div 
                 key={index} 
                 className="flex gap-4 p-4 bg-zinc-900/30 border border-zinc-800/50 rounded-xl hover:border-zinc-700 transition-colors group"
               >
                 <div className="flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0">
-                  {React.cloneElement(skill.icon as React.ReactElement, { size: 28 })}
+                  
+                  {React.isValidElement(skill.icon) ? React.cloneElement(skill.icon as React.ReactElement, { size: 28 }) : null}
                 </div>
                 <div>
                   <h3 className="text-white text-sm font-semibold mb-1">{skill.title}</h3>
