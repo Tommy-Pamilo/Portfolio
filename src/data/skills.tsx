@@ -1,7 +1,7 @@
 import React from "react";
 import skillData from "../data/skills"; 
 
-type Skill = {
+export type Skill = {
   icon: JSX.Element;
   title: string;
   description: string;

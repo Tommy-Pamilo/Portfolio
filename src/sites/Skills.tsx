@@ -1,15 +1,13 @@
 import React from "react";
-import { FaReact, FaUnity, FaCss3Alt, FaDatabase } from "react-icons/fa";
-import { SiTypescript, SiCsharp, SiGithub } from "react-icons/si";
-import skillData from "../data/skills";
+import skillData from "../data/skills"; 
 
-type SkillBoxProps = {
+export type Skill = {
   icon: JSX.Element;
   title: string;
   description: string;
 };
 
-function SkillBox({ icon, title, description }: SkillBoxProps) {
+function SkillBox({ icon, title, description }: Skill) {
   return (
     <div className="border rounded-lg p-4 shadow-md w-full h-full flex flex-col">
       <div className="flex items-center gap-4 mb-3">
@@ -23,10 +21,11 @@ function SkillBox({ icon, title, description }: SkillBoxProps) {
 
 export default function Skills() {
   return (
-    <div className="p-4 max-w-6xl  mx-auto mt-20 mb-20 text-white">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4  justify-items-center">
-        {skillData.map((skill) => (
+    <div className="p-4 max-w-6xl mx-auto mt-20 mb-20 text-white">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+        {Array.isArray(skillData) && skillData.map((skill: Skill, index: number) => (
           <SkillBox
+            key={index}
             icon={skill.icon}
             title={skill.title}
             description={skill.description}
