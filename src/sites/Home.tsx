@@ -4,12 +4,7 @@ import projectsData from "../data/projects";
 import skillData from "../data/skills"; 
 import { MdEmail } from "react-icons/md"; 
 
-
-interface HomeProps {
-  onContactClick: () => void;
-}
-
-export default function Home({ onContactClick }: HomeProps) {
+export default function Home() {
   const [galleryImages, setGalleryImages] = useState<string[] | null>(null);
   const [currentIdx, setCurrentIdx] = useState(0);
 
@@ -111,15 +106,6 @@ export default function Home({ onContactClick }: HomeProps) {
             </div>
           </div>
         )}
-
-    
-        
-<button 
-  onClick={onContactClick}
-  className="hidden md:block fixed bottom-8 right-8 z-[140] bg-white hover:bg-red-600 text-black hover:text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 group"
->
-  <MdEmail size={24} className="group-hover:rotate-12 transition-transform" />
-</button>
 
         <footer className="mt-20 pt-8 border-t border-zinc-900 text-[10px] tracking-widest text-zinc-600 uppercase">
           © {new Date().getFullYear()} Tommy Pamilo • Portfolio

@@ -1,15 +1,12 @@
+// Korvaa src/Components/Navbar.tsx tällä:
+
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FiLinkedin } from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-
-interface NavbarProps {
-  onContactClick: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
+const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-0 left-0 w-full h-16 text-white flex items-center justify-between px-6 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5 font-sans">
       
@@ -20,14 +17,6 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
         <a href="https://github.com/Tommy-Pamilo" rel="noreferrer" target="_blank" className="transition-transform hover:scale-110">
           <FaGithub className="hover:text-red-500 text-zinc-400 text-xl" />
         </a>
-
-     
-        <button 
-          onClick={onContactClick}
-          className="md:hidden transition-transform hover:scale-110 focus:outline-none"
-        >
-          <MdEmail className="hover:text-red-500 text-zinc-400 text-2xl" />
-        </button>
       </div>
 
       <div className="flex gap-8 uppercase tracking-widest text-sm">
